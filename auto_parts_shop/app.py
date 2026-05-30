@@ -32,12 +32,12 @@ def role_required(allowed_roles):
         return decorated_function
     return decorator
 
-# ---------- Главная страница (каталог) ----------
+#  Главная страница (каталог) 
 @app.route('/')
 def index():
     return redirect(url_for('catalog'))
 
-# ---------- Регистрация ----------
+# Регистрация 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -286,7 +286,7 @@ def order_detail(order_id):
         return redirect(url_for('login'))
     conn = get_db_connection()
     cur = conn.cursor()
-    # Проверка принадлежности заказа пользователю или права админа/менеджера
+    # Проверка принадлежности заказа пользователю или права админа\манагера
     cur.execute("SELECT ClientId FROM Orders WHERE Id = %s", (order_id,))
     result = cur.fetchone()
     if not result:
@@ -309,7 +309,7 @@ def order_detail(order_id):
     conn.close()
     return render_template('order_detail.html', order_id=order_id, items=items, order_info=order_info)
 
-# ---------- Административная панель (только admin/manager) ----------
+# ---------- Административная панель (только админ или манагер ) ----------
 @app.route('/admin')
 @role_required(['admin', 'manager'])
 def admin_panel():
@@ -473,7 +473,7 @@ def admin_product_delete(id):
         conn.close()
     return redirect(url_for('admin_products'))
 
-# Управление заказами для менеджера/админа
+# Управление заказами для админа
 @app.route('/admin/orders')
 @role_required(['admin', 'manager'])
 def admin_orders():
@@ -503,7 +503,7 @@ def admin_order_status(order_id):
     flash('Статус заказа обновлён', 'success')
     return redirect(url_for('admin_orders'))
 
-# ---------- Отчёты (только admin/manager) ----------
+# ---------- Отчеты (только админ маангер) ----------
 @app.route('/reports')
 @role_required(['admin', 'manager'])
 def reports():
