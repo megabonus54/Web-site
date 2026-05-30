@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Популярные товары{% endblock %}
+{% block content %}
+<h1>Самые популярные товары</h1>
+<table border="1">
+    <tr><th>Товар</th><th>Продано, шт</th></tr>
+    {% for p in popular %}
+    <tr><td>{{ p[0] }}</td><td>{{ p[1] }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}

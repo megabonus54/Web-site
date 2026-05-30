@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Отчёты{% endblock %}
+{% block content %}
+<h1>Отчёты</h1>
+<ul>
+    <li><a href="{{ url_for('reports_sales') }}">Отчёт по продажам за период</a></li>
+    <li><a href="{{ url_for('reports_popular') }}">Самые популярные товары</a></li>
+</ul>
+{% endblock %}

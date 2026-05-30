@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Корзина{% endblock %}
+{% block content %}
+<h1>Корзина</h1>
+{% if items %}
+    <form method="post" action="{{ url_for('update_cart') }}">
+        <table border="1">
+            <tr><th>Товар</th><th>Цена</th><th>Количество</th><th>Сумма</th><th></th></tr>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.price }} руб.</td>
+                <td><input type="number" name="qty_{{ item.id }}" value="{{ item.quantity }}" min="1" max="{{ item.stock }}"></td>
+                <td>{{ item.subtotal }} руб.</td>
+                <td><a href="{{ url_for('remove_from_cart', product_id=item.id) }}">Удалить</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <p><strong>Итого: {{ total }} руб.</strong></p>
+        <input type="submit" value="Обновить корзину">
+    </form>
+    <a href="{{ url_for('checkout') }}">Оформить заказ</a>
+{% else %}
+    <p>Корзина пуста</p>
+{% endif %}
+<p><a href="{{ url_for('catalog') }}">Продолжить покупки</a></p>
+{% endblock %}
