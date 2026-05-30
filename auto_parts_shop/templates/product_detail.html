@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{ product[1] }}{% endblock %}
+{% block content %}
+<h1>{{ product[1] }}</h1>
+<p><strong>Артикул:</strong> {{ product[7] }}</p>
+<p><strong>Производитель:</strong> {{ product[5] }}</p>
+<p><strong>Категория:</strong> {{ product[6] }}</p>
+<p><strong>Цена:</strong> {{ product[2] }} руб.</p>
+<p><strong>Наличие на складе:</strong> {{ product[3] }} шт.</p>
+<p><strong>Описание:</strong> {{ product[4] }}</p>
+{% if product[8] %}
+    <img src="{{ product[8] }}" alt="{{ product[1] }}" style="max-width:200px;">
+{% endif %}
+<br>
+<a href="{{ url_for('add_to_cart', product_id=product[0]) }}">Добавить в корзину</a>
+<p><a href="{{ url_for('catalog') }}">Вернуться в каталог</a></p>
+{% endblock %}

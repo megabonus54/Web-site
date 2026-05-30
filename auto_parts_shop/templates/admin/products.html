@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Товары{% endblock %}
+{% block content %}
+<h2>Товары</h2>
+<a href="{{ url_for('admin_product_add') }}">Добавить товар</a>
+<table border="1">
+    <tr><th>ID</th><th>Артикул</th><th>Название</th><th>Категория</th><th>Производитель</th><th>Цена</th><th>Остаток</th><th></th></tr>
+    {% for p in products %}
+    <tr>
+        <td>{{ p[0] }}</td>
+        <td>{{ p[6] }}</td>
+        <td>{{ p[1] }}</td>
+        <td>{{ p[4] or '-' }}</td>
+        <td>{{ p[5] or '-' }}</td>
+        <td>{{ p[2] }} руб.</td>
+        <td>{{ p[3] }}</td>
+        <td>
+            <a href="{{ url_for('admin_product_edit', id=p[0]) }}">Ред</a>
+            <a href="{{ url_for('admin_product_delete', id=p[0]) }}" onclick="return confirm('Удалить?')">Уд</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Редактирование' if edit else 'Добавление' }} товара{% endblock %}
+{% block content %}
+<h2>{{ 'Редактирование' if edit else 'Добавление' }} товара</h2>
+<form method="post">
+    Артикул: <input type="text" name="code" value="{{ product[1] if edit else '' }}" required><br>
+    Название: <input type="text" name="name" value="{{ product[2] if edit else '' }}" required><br>
+    Категория:
+    <select name="category_id">
+        <option value="">-- без категории --</option>
+        {% for cat in categories %}
+            <option value="{{ cat[0] }}" {% if edit and product[3] == cat[0] %}selected{% endif %}>{{ cat[1] }}</option>
+        {% endfor %}
+    </select><br>
+    Производитель: <input type="text" name="manufacturer" value="{{ product[4] if edit else '' }}"><br>
+    Цена: <input type="number" step="0.01" name="price" value="{{ product[5] if edit else '' }}" required><br>
+    Количество на складе: <input type="number" name="quantity" value="{{ product[6] if edit else '' }}" required><br>
+    Описание: <textarea name="description">{{ product[7] if edit else '' }}</textarea><br>
+    URL изображения: <input type="text" name="image_url" value="{{ product[8] if edit else '' }}"><br>
+    <input type="submit" value="Сохранить">
+</form>
+{% endblock %}

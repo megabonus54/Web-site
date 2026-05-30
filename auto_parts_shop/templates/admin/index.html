@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Админка{% endblock %}
+{% block content %}
+<h2>Панель администратора</h2>
+<ul>
+    <li><a href="{{ url_for('admin_categories') }}">Управление категориями</a></li>
+    <li><a href="{{ url_for('admin_products') }}">Управление товарами</a></li>
+    <li><a href="{{ url_for('admin_orders') }}">Управление заказами</a></li>
+    <li><a href="{{ url_for('reports') }}">Отчёты</a></li>
+</ul>
+{% endblock %}

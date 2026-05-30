@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Управление заказами{% endblock %}
+{% block content %}
+<h2>Все заказы</h2>
+<table border="1">
+    <tr><th>№</th><th>Клиент</th><th>Дата</th><th>Сумма</th><th>Статус</th><th>Изменить статус</th></tr>
+    {% for o in orders %}
+    <tr>
+        <td>{{ o[0] }}</td>
+        <td>{{ o[4] }}</td>
+        <td>{{ o[1] }}</td>
+        <td>{{ o[3] }} руб.</td>
+        <td>{{ o[2] }}</td>
+        <td>
+            <form method="post" action="{{ url_for('admin_order_status', order_id=o[0]) }}">
+                <select name="status">
+                    <option value="new" {% if o[2]=='new' %}selected{% endif %}>new</option>
+                    <option value="processing" {% if o[2]=='processing' %}selected{% endif %}>processing</option>
+                    <option value="shipped" {% if o[2]=='shipped' %}selected{% endif %}>shipped</option>
+                    <option value="completed" {% if o[2]=='completed' %}selected{% endif %}>completed</option>
+                </select>
+                <input type="submit" value="Обновить">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

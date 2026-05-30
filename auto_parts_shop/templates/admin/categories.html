@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Категории{% endblock %}
+{% block content %}
+<h2>Категории</h2>
+<a href="{{ url_for('admin_category_add') }}">Добавить категорию</a>
+<table border="1">
+    <tr><th>ID</th><th>Название</th><th>Описание</th><th></th></tr>
+    {% for cat in categories %}
+    <tr>
+        <td>{{ cat[0] }}</td>
+        <td>{{ cat[1] }}</td>
+        <td>{{ cat[2] }}</td>
+        <td>
+            <a href="{{ url_for('admin_category_edit', id=cat[0]) }}">Редактировать</a>
+            <a href="{{ url_for('admin_category_delete', id=cat[0]) }}" onclick="return confirm('Удалить?')">Удалить</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

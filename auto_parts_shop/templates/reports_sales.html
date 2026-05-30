@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Продажи за период{% endblock %}
+{% block content %}
+<h1>Отчёт по продажам</h1>
+<form method="get">
+    <label>Дата начала:</label> <input type="date" name="start_date" value="{{ start_date or '' }}">
+    <label>Дата окончания:</label> <input type="date" name="end_date" value="{{ end_date or '' }}">
+    <input type="submit" value="Показать">
+</form>
+{% if total_sales is not none %}
+    <p>Общая выручка: {{ total_sales }} руб.</p>
+    <p>Количество заказов: {{ order_count }}</p>
+{% else %}
+    <p>Выберите период.</p>
+{% endif %}
+{% endblock %}

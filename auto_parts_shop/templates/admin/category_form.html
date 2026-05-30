@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Редактирование' if category else 'Добавление' }} категории{% endblock %}
+{% block content %}
+<h2>{{ 'Редактирование' if category else 'Добавление' }} категории</h2>
+<form method="post">
+    Название: <input type="text" name="name" value="{{ category[0] if category else '' }}" required><br>
+    Описание: <textarea name="description">{{ category[1] if category else '' }}</textarea><br>
+    <input type="submit" value="Сохранить">
+</form>
+{% endblock %}

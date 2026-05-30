@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Каталог{% endblock %}
+{% block content %}
+<h1>Каталог автозапчастей</h1>
+<form method="get">
+    <input type="text" name="search" placeholder="Поиск по названию или производителю" value="{{ search }}">
+    <select name="category">
+        <option value="">Все категории</option>
+        {% for cat in categories %}
+            <option value="{{ cat[0] }}" {% if selected_category == cat[0] %}selected{% endif %}>{{ cat[1] }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Найти</button>
+</form>
+<div>
+    {% for p in products %}
+        <div style="border:1px solid #ccc; margin:10px; padding:10px;">
+            <h3><a href="{{ url_for('product_detail', product_id=p[0]) }}">{{ p[1] }}</a></h3>
+            <p>Цена: {{ p[2] }} руб.</p>
+            <p>Наличие: {{ p[3] }} шт.</p>
+            <p>Производитель: {{ p[5] }}</p>
+            <p>Категория: {{ p[4] }}</p>
+            <a href="{{ url_for('add_to_cart', product_id=p[0]) }}">Добавить в корзину</a>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
